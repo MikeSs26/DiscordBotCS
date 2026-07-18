@@ -1,0 +1,18 @@
+# Build output
+bin/
+obj/
+
+# Rider / VS
+.idea/
+.vs/
+*.user
+
+# SQLite database files
+*.db
+*.db-shm
+*.db-wal
+
+# Local secrets & environment overrides
+appsettings.Development.json
+appsettings.Local.json
+.env
