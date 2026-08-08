@@ -42,6 +42,7 @@ builder.Services
     .AddSingleton<InteractionHandler>()
     .AddSingleton<IGatewayEventHandler>(sp => sp.GetRequiredService<InteractionHandler>())
     .AddSingleton<IGatewayEventHandler, WelcomeHandler>()
+    .AddSingleton<ModerationLogService>()
     .AddHostedService<DiscordBotService>();
 
 var host = builder.Build();

@@ -7,6 +7,7 @@ public static class BotEmbed
 {
     public static readonly Color Brand = new(88, 101, 242);   // Discord blurple
     public static readonly Color Success = new(87, 242, 135);
+    public static readonly Color Warning = new(254, 231, 92);
     public static readonly Color Danger = new(237, 66, 69);
 
     public static EmbedBuilder Create(string? title = null, Color? color = null) =>

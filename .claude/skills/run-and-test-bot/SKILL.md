@@ -7,8 +7,9 @@ description: Use when running the bot locally, verifying a change works against 
 
 ## Arranque
 ```powershell
-dotnet build          # verificación rápida sin conectar
-dotnet run            # arranca el bot (aplica migraciones y conecta)
+dotnet build                        # verificación rápida sin conectar
+dotnet test tests\DiscordBotCS.Tests  # lógica pura (ModerationGuard)
+dotnet run                          # arranca el bot (aplica migraciones y conecta)
 ```
 El bot queda corriendo en primer plano; logs por consola vía Serilog. Detener con Ctrl+C (apagado limpio en `DiscordBotService.StopAsync`).
 
@@ -32,4 +33,5 @@ dotnet user-secrets list
 ## Errores comunes
 - Eventos de miembros (bienvenidas) no llegan → falta activar el intent privilegiado **Server Members** en el Discord Developer Portal (el código ya pide `GuildMembers`).
 - `bot.db` bloqueada o corrupta en desarrollo: parar el bot y borrar `bot.db` — las migraciones la recrean al arrancar (solo datos locales de prueba).
-- El proyecto no tiene tests automatizados aún; la verificación es siempre build + prueba manual contra el servidor de pruebas.
+- Los tests cubren solo lógica pura (`tests/DiscordBotCS.Tests`). Los comandos y handlers no se testean: requerirían simular la API de Discord. Para ellos la verificación es build + prueba manual contra el servidor de pruebas.
+- Al añadir lógica con casos límite (jerarquías, límites de la API, parseo), extráela a un tipo puro sin dependencias de Discord.Net y testéala ahí, como se hizo con `ModerationGuard`.
