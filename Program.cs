@@ -43,7 +43,8 @@ builder.Services
     .AddSingleton<IGatewayEventHandler>(sp => sp.GetRequiredService<InteractionHandler>())
     .AddSingleton<IGatewayEventHandler, WelcomeHandler>()
     .AddSingleton<ModerationLogService>()
-    .AddHostedService<DiscordBotService>();
+    .AddHostedService<DiscordBotService>()
+    .AddHostedService<HeartbeatService>();
 
 var host = builder.Build();
 
