@@ -1,6 +1,8 @@
 # Build output
 bin/
 obj/
+publish/
+*.tar.gz
 
 # Rider / VS
 .idea/

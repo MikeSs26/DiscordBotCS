@@ -1,0 +1,35 @@
+[Unit]
+Description=DiscordBotCS - Discord bot
+Documentation=https://github.com/
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=discordbot
+Group=discordbot
+
+WorkingDirectory=/opt/discordbot
+ExecStart=/opt/discordbot/DiscordBotCS
+
+# Token and connection string live here, never in the published files.
+EnvironmentFile=/etc/discordbot/discordbot.env
+
+# Restart on crash and after a reboot.
+Restart=always
+RestartSec=10
+
+# Serilog writes to stdout; journald captures it (journalctl -u discordbot).
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=discordbot
+
+# Hardening: the app only needs to read /opt and write the database directory.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/discordbot
+
+[Install]
+WantedBy=multi-user.target
