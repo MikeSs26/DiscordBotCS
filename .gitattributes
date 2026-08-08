@@ -1,0 +1,5 @@
+# Files that get copied to the Linux server keep LF regardless of the
+# checkout platform, so a clone on Windows (core.autocrlf=true) does not
+# hand CRLF content to the droplet.
+*.service text eol=lf
+*.sh      text eol=lf
